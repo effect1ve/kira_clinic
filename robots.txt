@@ -1,0 +1,9 @@
+User-agent: *
+
+Disallow: /*?utm_referer
+Disallow: /*?utm_ya_campaign
+Disallow: /*?yabizcmpgn
+Disallow: /*?utm_candidate
+Disallow: /*?ved
+Disallow: /*?back_url_admin
+Disallow: /*&clear_cache=Y

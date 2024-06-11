@@ -1,0 +1,30 @@
+RewriteEngine on
+# Если запрос направлен к существующему каталогу, разрешить доступ
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Если запрос направлен к существующему файлу, разрешить доступ
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Проверка и удаление параметров
+RewriteCond %{QUERY_STRING} (^|&)ved= [NC]
+RewriteRule ^ %{REQUEST_URI}? [R=301,L]
+
+# Удаляем .html из URL
+RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC] -f
+RewriteRule ^ /%1 [NC,L,R]
+
+# Добавляем обратно правило для обработки запросов к файлу без расширения
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^ %{REQUEST_URI}.html [NC,L]
+
+# Если это не файл и не директория, тогда ошибка 404
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /404.html [L]
+
+
+
+
